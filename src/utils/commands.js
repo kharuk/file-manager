@@ -8,6 +8,7 @@ import { copy } from "../commands/files/copy.js";
 import { move } from "../commands/files/move.js";
 import { remove } from "../commands/files/remove.js";
 import { osCommands } from "../commands/os.js";
+import { calculateHash } from "../commands/hash.js";
 
 export const commandsListener = async (command, args) => {
   switch (command) {
@@ -73,6 +74,14 @@ export const commandsListener = async (command, args) => {
       }
       await osCommands(args[0]);
       break;
+    case "hash":
+      if (!args.length) {
+        console.log(`Invalid input.`);
+        break;
+      }
+      await calculateHash(args[0]);
+      break;
+
     default:
       console.log(`Invalid input`);
       break;
