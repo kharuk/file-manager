@@ -9,6 +9,8 @@ import { move } from "../commands/files/move.js";
 import { remove } from "../commands/files/remove.js";
 import { osCommands } from "../commands/os.js";
 import { calculateHash } from "../commands/hash.js";
+import { compress } from "../commands/compress.js";
+import { decompress } from "../commands/decompress.js";
 
 export const commandsListener = async (command, args) => {
   switch (command) {
@@ -81,7 +83,20 @@ export const commandsListener = async (command, args) => {
       }
       await calculateHash(args[0]);
       break;
-
+    case "compress":
+      if (args.length < 2) {
+        console.log(`Invalid input`);
+        break;
+      }
+      await compress(args[0], args[1]);
+      break;
+    case "decompress":
+      if (args.length < 2) {
+        console.log(`Invalid input`);
+        break;
+      }
+      await decompress(args[0], args[1]);
+      break;
     default:
       console.log(`Invalid input`);
       break;
